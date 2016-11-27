@@ -15,13 +15,16 @@
   <body>
     <a-scene>
       <a-assets>
-        <img id="city" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg">
-        <img id="city-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg">
-        <img id="cubes-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
-        <img id="sechelt-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg">
-        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
-        <img id="cubes" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg">
-        <img id="sechelt" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
+        <!-- Source audio. -->
+        <audio id="click-sound" src="audio/click.ogg"></audio>
+
+        <!-- Source images. -->
+        <img id="city" crossorigin="anonymous" src="img/city.jpg">
+        <img id="city-thumb" crossorigin="anonymous" src="img/thumb-city.jpg">
+        <img id="cubes" crossorigin="anonymous" src="img/cubes.jpg">
+        <img id="cubes-thumb" crossorigin="anonymous" src="img/thumb-cubes.jpg">
+        <img id="sechelt" crossorigin="anonymous" src="img/sechelt.jpg">
+        <img id="sechelt-thumb" crossorigin="anonymous" src="img/thumb-sechelt.jpg">
 
         <!-- Image link template to be reused. -->
         <script id="link" type="text/nunjucks">
@@ -33,29 +36,29 @@
             event-set__4="_event: mouseleave; scale: 1 1 1"
             set-image="on: click; target: #image-360; src: {{ src }}"
             sound="on: click; src: #click-sound"
-            update-raycaster="#cursor"></a-plane>
+            update-raycaster="#cursor">
+          </a-plane>
         </script>
       </a-assets>
-
       <!-- 360-degree image. -->
-      <a-sky id="image-360" radius="10" src="#city"></a-sky>
+      <a-sky id="image-360" radius="10" src="#cubes"></a-sky>
 
-      <!-- Image links. -->
-      <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
-        <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
+      <!-- Links. -->
+      <a-entity id="links" layout="layout: line; margin: 1.5" position="-1.5 1.5 -3">
         <a-entity template="src: #link" data-src="#city" data-thumb="#city-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
         <a-entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity>
       </a-entity>
 
-      <!-- Camera + cursor. -->
-      <a-entity camera look-controls>
+      <!-- Camera + Cursor. -->
+      <a-camera look-controls>
         <a-cursor id="cursor"
           animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
           animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
           event-set__1="_event: mouseenter; color: springgreen"
           event-set__2="_event: mouseleave; color: black"
           raycaster="objects: .link"></a-cursor>
-      </a-entity>
+      </a-camera>
     </a-scene>
   </body>
 </html>
